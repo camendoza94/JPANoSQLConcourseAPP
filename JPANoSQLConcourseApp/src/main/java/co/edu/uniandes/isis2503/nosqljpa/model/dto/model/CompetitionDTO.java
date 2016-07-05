@@ -21,18 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.model.dto.model;
+package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
+@XmlRootElement
 public class CompetitionDTO {
 
-    private Long id;
+    private String id;
 
     private String name;
 
@@ -42,7 +44,7 @@ public class CompetitionDTO {
 
     private String year;
 
-    private List<Long> competitors;
+    private List<String> competitors;
 
     private long winnerId;
 
@@ -52,7 +54,7 @@ public class CompetitionDTO {
         this.competitors = new ArrayList();
     }
 
-    public CompetitionDTO(Long id, String name, String city, String country, String year, List<Long> competitors, long winnerId, double prize) {
+    public CompetitionDTO(String id, String name, String city, String country, String year, List<String> competitors, long winnerId, double prize) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -63,11 +65,11 @@ public class CompetitionDTO {
         this.prize = prize;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -119,15 +121,15 @@ public class CompetitionDTO {
         this.prize = prize;
     }
 
-    public List<Long> getCompetitors() {
+    public List<String> getCompetitors() {
         return competitors;
     }
 
-    public void setCompetitors(List<Long> competitors) {
+    public void setCompetitors(List<String> competitors) {
         this.competitors = competitors;
     }
     
-    public void addCompetitor(Long id){
+    public void addCompetitor(String id){
         this.competitors.add(id);
     }
 

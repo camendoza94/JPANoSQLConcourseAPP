@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.model.dto.model;
+package co.edu.uniandes.isis2503.nosqljpa.model.dto.model;
 
 import java.io.Serializable;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CompetitorDTO implements Serializable{
     
-    private Long id;
+    private String id;
     private String email;
     private String name;
     private String surname;
@@ -47,7 +47,7 @@ public class CompetitorDTO implements Serializable{
     public CompetitorDTO() {
     }
 
-    public CompetitorDTO(Long id, String email, String name, String surname, int age, String telephone, String cellphone, String address, String city, String country) {
+    public CompetitorDTO(String id, String email, String name, String surname, int age, String telephone, String cellphone, String address, String city, String country) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -60,11 +60,11 @@ public class CompetitorDTO implements Serializable{
         this.country = country;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

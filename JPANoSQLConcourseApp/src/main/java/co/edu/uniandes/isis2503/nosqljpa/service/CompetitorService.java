@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.service;
+package co.edu.uniandes.isis2503.nosqljpa.service;
 
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitorLogic;
-import co.edu.uniandes.isis2503.basic.logic.CompetitorLogic;
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitorDTO;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitorLogic;
+import co.edu.uniandes.isis2503.nosqljpa.logic.CompetitorLogic;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
 import com.sun.istack.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
@@ -65,7 +65,7 @@ public class CompetitorService {
 
     @GET
     @Path("/{id}")
-    public CompetitorDTO find(@PathParam("id") Long id) {
+    public CompetitorDTO find(@PathParam("id") String id) {
         return logic.find(id);
     }
 

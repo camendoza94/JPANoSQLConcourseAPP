@@ -21,13 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.logic;
+package co.edu.uniandes.isis2503.nosqljpa.logic;
 
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitorLogic;
-import static co.edu.uniandes.isis2503.basic.model.dto.converter.CompetitorConverter.CONVERTER;
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitorDTO;
-import co.edu.uniandes.isis2503.basic.persistence.CompetitorPersistence;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitorLogic;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitorPersistence;
+import static co.edu.uniandes.isis2503.nosqljpa.model.dto.converter.CompetitorConverter.CONVERTER;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
+import co.edu.uniandes.isis2503.nosqljpa.persistence.CompetitorPersistence;
 import java.util.List;
+import javax.inject.Inject;
 
 /**
  *
@@ -35,10 +37,15 @@ import java.util.List;
  */
 public class CompetitorLogic implements ICompetitorLogic {
 
-    private final CompetitorPersistence persistence;
+    @Inject
+    private ICompetitorPersistence persistence;
 
     public CompetitorLogic() {
         this.persistence = new CompetitorPersistence();
+    }
+
+    public CompetitorLogic(ICompetitorPersistence persistence) {
+        this.persistence = persistence;
     }
 
     @Override
@@ -54,7 +61,7 @@ public class CompetitorLogic implements ICompetitorLogic {
     }
 
     @Override
-    public CompetitorDTO find(Long id) {
+    public CompetitorDTO find(String id) {
         return CONVERTER.entityToDto(persistence.find(id));
     }
 
@@ -77,5 +84,15 @@ public class CompetitorLogic implements ICompetitorLogic {
     public Boolean delete(CompetitorDTO dto) {
         return persistence.delete(CONVERTER.dtoToEntity(dto));
     }
+
+    public ICompetitorPersistence getPersistence() {
+        return persistence;
+    }
+
+    public void setPersistence(ICompetitorPersistence persistence) {
+        this.persistence = persistence;
+    }
+    
+    
 
 }

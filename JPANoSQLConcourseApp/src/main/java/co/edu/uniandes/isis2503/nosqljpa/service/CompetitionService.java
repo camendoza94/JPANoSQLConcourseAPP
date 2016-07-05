@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.service;
+package co.edu.uniandes.isis2503.nosqljpa.service;
 
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitionLogic;
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitorLogic;
-import co.edu.uniandes.isis2503.basic.logic.CompetitionLogic;
-import co.edu.uniandes.isis2503.basic.logic.CompetitorLogic;
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitionDTO;
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitorDTO;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionLogic;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitorLogic;
+import co.edu.uniandes.isis2503.nosqljpa.logic.CompetitionLogic;
+import co.edu.uniandes.isis2503.nosqljpa.logic.CompetitorLogic;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitionDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
 import com.sun.istack.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
@@ -65,7 +65,7 @@ public class CompetitionService {
     
     @POST
     @Path("{id}/add")
-    public CompetitorDTO addCompetitor(@PathParam("id")Long id ,CompetitorDTO dto) {
+    public CompetitorDTO addCompetitor(@PathParam("id")String id ,CompetitorDTO dto) {
         CompetitionDTO competition = competitionLogic.find(id);
         dto=competitorLogic.add(dto);
         competition.addCompetitor(dto.getId());
@@ -80,7 +80,7 @@ public class CompetitionService {
 
     @GET
     @Path("/{id}")
-    public CompetitionDTO find(@PathParam("id") Long id) {
+    public CompetitionDTO find(@PathParam("id") String id) {
         return competitionLogic.find(id);
     }
 

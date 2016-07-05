@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.interfaces;
+package co.edu.uniandes.isis2503.nosqljpa.interfaces;
 
-import co.edu.uniandes.isis2503.basic.model.entity.CompetitorEntity;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
 import java.util.List;
 
 /**
@@ -34,7 +34,7 @@ public interface ICompetitorPersistence {
     
     public CompetitorEntity add(CompetitorEntity entity);
     public CompetitorEntity update(CompetitorEntity entity);
-    public CompetitorEntity find(Long id);
+    public CompetitorEntity find(String id);
     public CompetitorEntity findByName(String name);
     public CompetitorEntity findByEmail(String email);
     public List<CompetitorEntity> all();

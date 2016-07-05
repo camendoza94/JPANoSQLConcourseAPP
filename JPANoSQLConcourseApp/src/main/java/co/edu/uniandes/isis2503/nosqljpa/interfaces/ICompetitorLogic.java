@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.interfaces;
+package co.edu.uniandes.isis2503.nosqljpa.interfaces;
 
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitorDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
 import java.util.List;
 
 /**
@@ -34,7 +34,7 @@ public interface ICompetitorLogic {
     
     public CompetitorDTO add(CompetitorDTO dto);
     public CompetitorDTO update(CompetitorDTO dto);
-    public CompetitorDTO find(Long id);
+    public CompetitorDTO find(String id);
     public CompetitorDTO findByName(String name);
     public CompetitorDTO findByEmail(String name);
     public List<CompetitorDTO> all();

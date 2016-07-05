@@ -21,14 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.logic;
+package co.edu.uniandes.isis2503.nosqljpa.logic;
 
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitionLogic;
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitionPersistence;
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitionDTO;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionLogic;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionPersistence;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitionDTO;
 import java.util.List;
-import static co.edu.uniandes.isis2503.basic.model.dto.converter.CompetitionConverter.CONVERTER;
-import co.edu.uniandes.isis2503.basic.persistence.CompetitionPersistence;
+import static co.edu.uniandes.isis2503.nosqljpa.model.dto.converter.CompetitionConverter.CONVERTER;
+import co.edu.uniandes.isis2503.nosqljpa.persistence.CompetitionPersistence;
+import javax.inject.Inject;
 
 /**
  *
@@ -36,10 +37,15 @@ import co.edu.uniandes.isis2503.basic.persistence.CompetitionPersistence;
  */
 public class CompetitionLogic implements ICompetitionLogic{
 
-    private final ICompetitionPersistence persistence;
+    @Inject
+    private ICompetitionPersistence persistence;
 
     public CompetitionLogic() {
         this.persistence = new CompetitionPersistence();
+    }
+
+    public CompetitionLogic(ICompetitionPersistence persistence) {
+        this.persistence = persistence;
     }
 
     @Override
@@ -55,7 +61,7 @@ public class CompetitionLogic implements ICompetitionLogic{
     }
 
     @Override
-    public CompetitionDTO find(Long id) {
+    public CompetitionDTO find(String id) {
         return CONVERTER.entityToDto(persistence.find(id));
     }
 
@@ -73,4 +79,14 @@ public class CompetitionLogic implements ICompetitionLogic{
     public Boolean delete(CompetitionDTO dto) {
         return persistence.delete(CONVERTER.dtoToEntity(dto));
     }
+
+    public ICompetitionPersistence getPersistence() {
+        return persistence;
+    }
+
+    public void setPersistence(ICompetitionPersistence persistence) {
+        this.persistence = persistence;
+    }
+    
+    
 }

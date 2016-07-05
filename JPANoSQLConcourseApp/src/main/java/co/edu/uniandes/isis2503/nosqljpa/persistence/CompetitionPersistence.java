@@ -21,19 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.persistence;
+package co.edu.uniandes.isis2503.nosqljpa.persistence;
 
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitionPersistence;
-import co.edu.uniandes.isis2503.basic.model.entity.CompetitionEntity;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionPersistence;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -46,8 +44,7 @@ public class CompetitionPersistence implements ICompetitionPersistence{
     private EntityManager em;
     
     public CompetitionPersistence(){
-        final EntityManagerFactory emf = Persistence.createEntityManagerFactory("ConcourseAPP");
-        em = emf.createEntityManager();
+        em = JPAConnection.CONNECTION.getEntityManager();
     }
 
     @Override
@@ -86,7 +83,7 @@ public class CompetitionPersistence implements ICompetitionPersistence{
     }
 
     @Override
-    public CompetitionEntity find(Long id) {
+    public CompetitionEntity find(String id) {
         CompetitionEntity competitor;
         Query query = em.createQuery("Select e FROM CompetitionEntity e WHERE e.id = :id");
         query.setParameter("id", id);
@@ -122,8 +119,6 @@ public class CompetitionPersistence implements ICompetitionPersistence{
         } catch (NoResultException | NonUniqueResultException e) {
             competitors = null;
             LOG.log(Level.WARNING, e.getMessage());
-        } finally {
-            em.close();
         }
         return competitors;
     }

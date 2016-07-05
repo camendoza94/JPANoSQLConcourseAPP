@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.model.dto.converter;
+package co.edu.uniandes.isis2503.nosqljpa.model.dto.converter;
 
-import co.edu.uniandes.isis2503.basic.interfaces.ICompetitorConverter;
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitorDTO;
-import co.edu.uniandes.isis2503.basic.model.entity.CompetitorEntity;
+import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitorConverter;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.interfaces;
+package co.edu.uniandes.isis2503.nosqljpa.interfaces;
 
-import co.edu.uniandes.isis2503.basic.model.dto.model.CompetitionDTO;
-import co.edu.uniandes.isis2503.basic.model.entity.CompetitionEntity;
+import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitionDTO;
+import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity;
 import java.util.List;
 
 /**

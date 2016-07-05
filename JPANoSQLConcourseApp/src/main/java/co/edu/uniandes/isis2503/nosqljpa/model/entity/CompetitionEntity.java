@@ -21,43 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.model.entity;
+package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
 @Entity
+@Table(name="competitions",schema="concourse_test@cassandra_db")
 public class CompetitionEntity implements Serializable {
     
     @Id
     @GeneratedValue
-    private Long id;
-
+    private String id;
+    @Column
     private String name;
-
+    @Column
     private String city;
-
+    @Column
     private String country;
-
+    @Column
     private String year;
-
-    private List<Long> competitors;
-
+    @Column
+    private List<String> competitors;
+    @Column
     private long winnerId;
-
+    @Column
     private double prize;
 
     public CompetitionEntity() {
+        this.competitors = new ArrayList();
     }
 
-    public CompetitionEntity(Long id, String name, String city, String country, String year, List<Long> competitors, long winnerId, double prize) {
+    public CompetitionEntity(String id, String name, String city, String country, String year, List<String> competitors, long winnerId, double prize) {
         this.id = id;
         this.name = name;
         this.city = city;
@@ -68,11 +73,11 @@ public class CompetitionEntity implements Serializable {
         this.prize = prize;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -124,11 +129,11 @@ public class CompetitionEntity implements Serializable {
         this.prize = prize;
     }
 
-    public List<Long> getCompetitors() {
+    public List<String> getCompetitors() {
         return competitors;
     }
 
-    public void setCompetitors(List<Long> competitors) {
+    public void setCompetitors(List<String> competitors) {
         this.competitors = competitors;
     }
     

@@ -21,37 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.model.entity;
+package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
 @Entity
+@Table(name="competitors",schema="concourse_test@cassandra_db")
 public class CompetitorEntity implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private String id;
+    @Column
     private String email;
+    @Column
     private String name;
+    @Column
     private String surname;
+    @Column
     private int age;
+    @Column
     private String telephone;
+    @Column
     private String cellphone;
+    @Column
     private String address;
+    @Column
     private String city;
+    @Column
     private String country;
 
     public CompetitorEntity() {
     }
 
-    public CompetitorEntity(Long id, String email, String name, String surname, int age, String telephone, String cellphone, String address, String city, String country) {
+    public CompetitorEntity(String id, String email, String name, String surname, int age, String telephone, String cellphone, String address, String city, String country) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -64,11 +77,11 @@ public class CompetitorEntity implements Serializable {
         this.country = country;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

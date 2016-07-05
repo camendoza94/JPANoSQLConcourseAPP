@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.basic.main;
+package co.edu.uniandes.isis2503.nosqljpa.main;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

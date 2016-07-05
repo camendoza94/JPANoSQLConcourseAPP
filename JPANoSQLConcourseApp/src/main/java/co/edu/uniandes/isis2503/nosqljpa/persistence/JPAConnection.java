@@ -21,21 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package co.edu.uniandes.isis2503.nosqljpa.interfaces;
+package co.edu.uniandes.isis2503.nosqljpa.persistence;
 
-import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
-import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
-import java.util.List;
+import com.impetus.client.cassandra.common.CassandraConstants;
+import java.util.HashMap;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
-public interface ICompetitorConverter {
-    
-    public CompetitorDTO entityToDto(CompetitorEntity entity);
-    public CompetitorEntity dtoToEntity(CompetitorDTO dto);
-    public List<CompetitorDTO> listEntitiesToListDTOs(List<CompetitorEntity> entities);
-    public List<CompetitorEntity> listDTOsToListEntities(List<CompetitorDTO> dtos);
-    
+public class JPAConnection {
+
+    public static final JPAConnection CONNECTION = new JPAConnection();
+    private final EntityManager em;
+
+    private JPAConnection() {
+        Map<String, String> propertyMap = new HashMap<>();
+        propertyMap.put(CassandraConstants.CQL_VERSION, CassandraConstants.CQL_VERSION_3_0);
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("cassandra_db", propertyMap);
+        em = emf.createEntityManager();
+    }
+
+    public EntityManager getEntityManager() {
+        return em;
+    }
 }
