@@ -26,7 +26,6 @@ package co.edu.uniandes.isis2503.nosqljpa.persistence;
 import com.impetus.client.cassandra.common.CassandraConstants;
 import java.util.HashMap;
 import java.util.Map;
-import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

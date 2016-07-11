@@ -25,7 +25,6 @@ package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 

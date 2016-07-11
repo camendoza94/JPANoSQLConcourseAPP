@@ -25,7 +25,6 @@ package co.edu.uniandes.isis2503.nosqljpa.persistence;
 
 
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
-import javax.inject.Inject;
 
 
 /**

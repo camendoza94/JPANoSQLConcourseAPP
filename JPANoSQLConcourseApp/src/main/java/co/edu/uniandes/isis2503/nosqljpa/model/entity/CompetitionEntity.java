@@ -30,7 +30,6 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
