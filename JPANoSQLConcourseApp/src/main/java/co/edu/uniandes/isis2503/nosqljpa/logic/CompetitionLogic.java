@@ -24,12 +24,10 @@
 package co.edu.uniandes.isis2503.nosqljpa.logic;
 
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionLogic;
-import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionPersistence;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitionDTO;
 import java.util.List;
 import static co.edu.uniandes.isis2503.nosqljpa.model.dto.converter.CompetitionConverter.CONVERTER;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.CompetitionPersistence;
-import javax.inject.Inject;
 
 /**
  *
@@ -37,15 +35,10 @@ import javax.inject.Inject;
  */
 public class CompetitionLogic implements ICompetitionLogic{
 
-    @Inject
-    private ICompetitionPersistence persistence;
+    private CompetitionPersistence persistence;
 
     public CompetitionLogic() {
         this.persistence = new CompetitionPersistence();
-    }
-
-    public CompetitionLogic(ICompetitionPersistence persistence) {
-        this.persistence = persistence;
     }
 
     @Override
@@ -79,14 +72,5 @@ public class CompetitionLogic implements ICompetitionLogic{
     public Boolean delete(CompetitionDTO dto) {
         return persistence.delete(CONVERTER.dtoToEntity(dto));
     }
-
-    public ICompetitionPersistence getPersistence() {
-        return persistence;
-    }
-
-    public void setPersistence(ICompetitionPersistence persistence) {
-        this.persistence = persistence;
-    }
-    
     
 }

@@ -22,23 +22,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
-<persistence xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
-    http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
-    version="2.0">
-    <persistence-unit name="cassandra_db" transaction-type="RESOURCE_LOCAL">
-        <provider>com.impetus.kundera.KunderaPersistence</provider>     
-        <properties>            
-            <property name="kundera.nodes" value="localhost"/>
-            <property name="kundera.port" value="9160"/>
-            <property name="kundera.keyspace" value="concourse_test"/>
-            <property name="kundera.dialect" value="cassandra"/>
-            <property name="kundera.ddl.auto.prepare" value="create" />
-            <property name="kundera.client.lookup.class" value="com.impetus.client.cassandra.thrift.ThriftClientFactory" />
-            <property name="kundera.pool.size.min.idle" value="5"/>
-            <property name="kundera.pool.size.max.idle" value="50"/>
-            <property name="kundera.pool.size.max.active" value="50"/>
-            <property name="kundera.pool.size.max.total" value="50"/>
-        </properties>       
-    </persistence-unit>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="cassandra_db" transaction-type="RESOURCE_LOCAL">
+    <provider>com.impetus.kundera.KunderaPersistence</provider>
+    <properties>
+      <property name="kundera.nodes" value="localhost"/>
+      <property name="kundera.port" value="9160"/>
+      <property name="kundera.keyspace" value="concourse"/>
+      <property name="kundera.dialect" value="cassandra"/>
+      <property name="kundera.client.lookup.class" value="com.impetus.client.cassandra.thrift.ThriftClientFactory"/>
+      <property name="kundera.pool.size.min.idle" value="5"/>
+      <property name="kundera.pool.size.max.idle" value="50"/>
+      <property name="kundera.pool.size.max.active" value="50"/>
+      <property name="kundera.pool.size.max.total" value="50"/>
+      <property name="kundera.ddl.auto.prepare" value="update"/>
+    </properties>
+  </persistence-unit>
+  <persistence-unit name="mysql_db">
+    <provider>com.impetus.kundera.KunderaPersistence</provider>
+    <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity</class>
+    <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="kundera.client.lookup.class" value="com.impetus.client.rdbms.RDBMSClientFactory"/>
+      <property name="kundera.client.property" value="hibernate.properties"/>
+      <property name="kundera.ddl.auto.prepare" value="update"/>
+    </properties>
+  </persistence-unit>
 </persistence>

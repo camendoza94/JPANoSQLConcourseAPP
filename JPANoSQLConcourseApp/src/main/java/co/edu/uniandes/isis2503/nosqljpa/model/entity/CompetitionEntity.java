@@ -26,36 +26,29 @@ package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
 @Entity
-@Table(name="competitions",schema="concourse_test@cassandra_db")
-public class CompetitionEntity implements Serializable {
-    
+@Table(name = "COMPETITION")
+public class CompetitionEntity implements Serializable{
+
     @Id
-    @GeneratedValue
     private String id;
-    @Column
     private String name;
-    @Column
     private String city;
-    @Column
     private String country;
-    @Column
     private String year;
-    @Column
+    @ElementCollection
     private List<String> competitors;
-    @Column
     private long winnerId;
-    @Column
     private double prize;
 
     public CompetitionEntity() {
@@ -136,5 +129,5 @@ public class CompetitionEntity implements Serializable {
     public void setCompetitors(List<String> competitors) {
         this.competitors = competitors;
     }
-    
+
 }

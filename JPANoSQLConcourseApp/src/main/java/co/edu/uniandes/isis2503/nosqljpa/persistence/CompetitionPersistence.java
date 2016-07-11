@@ -23,138 +23,18 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.persistence;
 
-import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitionPersistence;
+
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
+import javax.inject.Inject;
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
-public class CompetitionPersistence implements ICompetitionPersistence{
-    
-    private static final Logger LOG = Logger.getLogger(CompetitionPersistence.class.getName());
-    private EntityManager em;
-    
+public class CompetitionPersistence extends Persistencer<CompetitionEntity, String>{
+
     public CompetitionPersistence(){
-        em = JPAConnection.CONNECTION.getEntityManager();
+        this.entityClass = CompetitionEntity.class;
     }
 
-    @Override
-    public CompetitionEntity add(CompetitionEntity entity) {
-        EntityTransaction tx = null;
-        try {
-            tx = em.getTransaction();
-            tx.begin();
-            em.persist(entity);
-            tx.commit();
-            em.refresh(entity);
-        } catch (RuntimeException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return entity;
-    }
-
-    @Override
-    public CompetitionEntity update(CompetitionEntity entity) {
-        EntityTransaction tx = null;
-        try {
-            tx = em.getTransaction();
-            tx.begin();
-            em.merge(entity);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return entity;
-    }
-
-    @Override
-    public CompetitionEntity find(String id) {
-        CompetitionEntity competitor;
-        Query query = em.createQuery("Select e FROM CompetitionEntity e WHERE e.id = :id");
-        query.setParameter("id", id);
-        try {
-            competitor = (CompetitionEntity) query.getSingleResult();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitor = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitor;
-    }
-
-    @Override
-    public CompetitionEntity findByName(String name) {
-        CompetitionEntity competitor;
-        Query query = em.createQuery("Select e FROM CompetitionEntity e WHERE e.name = :name");
-        query.setParameter("name", name);
-        try {
-            competitor = (CompetitionEntity) query.getSingleResult();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitor = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitor;
-    }
-
-    @Override
-    public List<CompetitionEntity> all() {
-        List<CompetitionEntity> competitors;
-        Query query = em.createQuery("Select c FROM CompetitionEntity c");
-        try {
-            competitors = query.getResultList();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitors = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitors;
-    }
-
-    public EntityManager getEntityManager() {
-        return em;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.em = entityManager;
-    }
-
-    @Override
-    public Boolean delete(CompetitionEntity entity) {
-        EntityTransaction tx = null;
-        Query query = em.createQuery("Select e FROM CompetitionEntity e WHERE e.id = :id");
-        query.setParameter("id", entity.getId());
-
-        try {
-            CompetitionEntity found = (CompetitionEntity) query.getSingleResult();
-            if (found != null) {
-                tx = em.getTransaction();
-                tx.begin();
-                em.remove(found);
-                tx.commit();
-                return true;
-            } else {
-                throw new RuntimeException();
-            }
-        } catch (RuntimeException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            LOG.log(Level.WARNING, e.getMessage());
-            return false;
-        }
-    }
-    
 }

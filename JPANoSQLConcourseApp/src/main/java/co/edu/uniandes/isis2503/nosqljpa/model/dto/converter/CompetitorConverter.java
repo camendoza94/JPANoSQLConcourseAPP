@@ -28,6 +28,7 @@ import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
@@ -59,7 +60,12 @@ public class CompetitorConverter implements ICompetitorConverter {
     @Override
     public CompetitorEntity dtoToEntity(CompetitorDTO dto) {
         CompetitorEntity entity = new CompetitorEntity();
-        entity.setId(dto.getId());
+        if(dto.getId()==null){
+            dto.setId(UUID.randomUUID().toString());
+        }
+        else{
+            entity.setId(dto.getId());
+        }
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setAge(dto.getAge());

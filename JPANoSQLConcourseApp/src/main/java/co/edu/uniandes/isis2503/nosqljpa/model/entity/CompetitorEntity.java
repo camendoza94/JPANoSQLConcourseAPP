@@ -24,41 +24,30 @@
 package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
 @Entity
-@Table(name="competitors",schema="concourse_test@cassandra_db")
-public class CompetitorEntity implements Serializable {
+@Table(name = "COMPETITOR")
+//@Table(name = "COMPETITOR", schema = "concourse@cassandra_db")
+public class CompetitorEntity implements Serializable{
 
     @Id
-    @GeneratedValue
     private String id;
-    @Column
     private String email;
-    @Column
     private String name;
-    @Column
     private String surname;
-    @Column
     private int age;
-    @Column
     private String telephone;
-    @Column
     private String cellphone;
-    @Column
     private String address;
-    @Column
     private String city;
-    @Column
     private String country;
 
     public CompetitorEntity() {
@@ -157,5 +146,4 @@ public class CompetitorEntity implements Serializable {
         this.country = country;
     }
 
-    
 }

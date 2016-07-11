@@ -26,6 +26,7 @@ package co.edu.uniandes.isis2503.nosqljpa.persistence;
 import com.impetus.client.cassandra.common.CassandraConstants;
 import java.util.HashMap;
 import java.util.Map;
+import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -35,18 +36,27 @@ import javax.persistence.Persistence;
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
 public class JPAConnection {
-
+    
+    public static final String DB = "mysql_db";
+    private EntityManager entityManager;
     public static final JPAConnection CONNECTION = new JPAConnection();
-    private final EntityManager em;
-
-    private JPAConnection() {
-        Map<String, String> propertyMap = new HashMap<>();
-        propertyMap.put(CassandraConstants.CQL_VERSION, CassandraConstants.CQL_VERSION_3_0);
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("cassandra_db", propertyMap);
-        em = emf.createEntityManager();
+    
+    public JPAConnection(){
+        if (entityManager == null) {
+            EntityManagerFactory emf;
+            if (DB.equals("mysql_db")) {
+                emf = Persistence.createEntityManagerFactory("mysql_db");
+            } else {
+                Map<String, String> propertyMap = new HashMap<>();
+                propertyMap.put(CassandraConstants.CQL_VERSION, CassandraConstants.CQL_VERSION_3_0);
+                emf = Persistence.createEntityManagerFactory("cassandra_db", propertyMap);
+            }
+            entityManager = emf.createEntityManager();
+        }
     }
 
     public EntityManager getEntityManager() {
-        return em;
+        return entityManager;
     }
+    
 }

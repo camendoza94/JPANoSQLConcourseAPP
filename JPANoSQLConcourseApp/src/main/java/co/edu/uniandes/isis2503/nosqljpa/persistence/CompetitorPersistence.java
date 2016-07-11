@@ -23,155 +23,19 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.persistence;
 
-import co.edu.uniandes.isis2503.nosqljpa.interfaces.ICompetitorPersistence;
+
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
-import java.util.List;
-import java.util.logging.Level;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
+import javax.inject.Inject;
+
 
 /**
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
-public class CompetitorPersistence implements ICompetitorPersistence {
+public class CompetitorPersistence extends Persistencer<CompetitorEntity,String> {
     
-    private static final java.util.logging.Logger LOG = java.util.logging.Logger.getLogger(CompetitorPersistence.class.getName());
+    public CompetitorPersistence(){
+        this.entityClass = CompetitorEntity.class;
+    }
     
-    private EntityManager em;
-
-    public CompetitorPersistence() {
-        em = JPAConnection.CONNECTION.getEntityManager();
-    }
-
-    public CompetitorPersistence(EntityManager entityManager) {
-        this.em = entityManager;
-    }
-
-    @Override
-    public CompetitorEntity add(CompetitorEntity entity) {
-        EntityTransaction tx = null;
-        try {
-            tx = em.getTransaction();
-            tx.begin();
-            em.persist(entity);
-            tx.commit();
-            em.refresh(entity);
-        } catch (RuntimeException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return entity;
-    }
-
-    @Override
-    public CompetitorEntity update(CompetitorEntity entity) {
-        EntityTransaction tx = null;
-        try {
-            tx = em.getTransaction();
-            tx.begin();
-            em.merge(entity);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return entity;
-    }
-
-    @Override
-    public CompetitorEntity find(String id) {
-        CompetitorEntity competitor;
-        Query query = em.createQuery("Select e FROM CompetitorEntity e WHERE e.id = :id");
-        query.setParameter("id", id);
-        try {
-            competitor = (CompetitorEntity) query.getSingleResult();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitor = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitor;
-    }
-
-    @Override
-    public CompetitorEntity findByName(String name) {
-        CompetitorEntity competitor;
-        Query query = em.createQuery("Select e FROM CompetitorEntity e WHERE e.name = :name");
-        query.setParameter("name", name);
-        try {
-            competitor = (CompetitorEntity) query.getSingleResult();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitor = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitor;
-    }
-
-    @Override
-    public CompetitorEntity findByEmail(String email) {
-        CompetitorEntity competitor;
-        Query query = em.createQuery("Select e FROM CompetitorEntity e WHERE e.email = :email");
-        query.setParameter("email", email);
-        try {
-            competitor = (CompetitorEntity) query.getSingleResult();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitor = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitor;
-    }
-
-    @Override
-    public List<CompetitorEntity> all() {
-        List<CompetitorEntity> competitors;
-        Query query = em.createQuery("Select c FROM CompetitorEntity c");
-        try {
-            competitors = query.getResultList();
-        } catch (NoResultException | NonUniqueResultException e) {
-            competitors = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return competitors;
-    }
-
-    public EntityManager getEntityManager() {
-        return em;
-    }
-
-    public void setEntityManager(EntityManager entityManager) {
-        this.em = entityManager;
-    }
-
-    @Override
-    public Boolean delete(CompetitorEntity entity) {
-        EntityTransaction tx = null;
-        Query query = em.createQuery("Select e FROM CompetitorEntity e WHERE e.id = :id");
-        query.setParameter("id", entity.getId());
-
-        try {
-            CompetitorEntity found = (CompetitorEntity) query.getSingleResult();
-            if (found != null) {
-                tx = em.getTransaction();
-                tx.begin();
-                em.remove(found);
-                tx.commit();
-                return true;
-            } else {
-                throw new RuntimeException();
-            }
-        } catch (RuntimeException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
-            LOG.log(Level.WARNING, e.getMessage());
-            return false;
-        }
-    }
 }

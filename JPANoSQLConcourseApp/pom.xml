@@ -93,7 +93,26 @@
             <artifactId>kundera-cassandra-ds-driver</artifactId>
             <version>3.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.impetus.kundera.client</groupId>
+            <artifactId>kundera-rdbms</artifactId>
+            <version>3.5</version>
+        </dependency>
+        
+        <!-- Apache Common Utils -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.3.1.RELEASE</version>
+        </dependency>
 
+        
     </dependencies>
 
     <build>

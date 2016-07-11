@@ -25,6 +25,7 @@ package co.edu.uniandes.isis2503.nosqljpa.interfaces;
 
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *
