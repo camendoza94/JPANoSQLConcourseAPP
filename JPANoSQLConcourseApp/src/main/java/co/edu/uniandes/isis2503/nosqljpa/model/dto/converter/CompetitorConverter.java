@@ -60,12 +60,6 @@ public class CompetitorConverter implements ICompetitorConverter {
     @Override
     public CompetitorEntity dtoToEntity(CompetitorDTO dto) {
         CompetitorEntity entity = new CompetitorEntity();
-        if(dto.getId()==null){
-            dto.setId(UUID.randomUUID().toString());
-        }
-        else{
-            entity.setId(dto.getId());
-        }
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setAge(dto.getAge());

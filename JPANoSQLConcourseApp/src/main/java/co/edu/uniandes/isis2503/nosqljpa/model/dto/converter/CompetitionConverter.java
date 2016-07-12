@@ -28,7 +28,6 @@ import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitionDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  *
@@ -58,9 +57,6 @@ public class CompetitionConverter implements ICompetitionConverter{
     @Override
     public CompetitionEntity dtoToEntity(CompetitionDTO dto) {
         CompetitionEntity entity = new CompetitionEntity();
-        if(dto.getId()==null){
-            dto.setId(UUID.randomUUID().toString());
-        }
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setCity(dto.getCity());

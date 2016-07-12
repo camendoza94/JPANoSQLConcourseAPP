@@ -32,9 +32,7 @@ import javax.persistence.Table;
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
-@Entity
-@Table(name = "COMPETITOR")
-//@Table(name = "COMPETITOR", schema = "concourse@cassandra_db")
+
 public class CompetitorEntity implements Serializable{
 
     @Id

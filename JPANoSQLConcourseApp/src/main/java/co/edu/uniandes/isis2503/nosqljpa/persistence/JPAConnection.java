@@ -36,30 +36,6 @@ import javax.persistence.Persistence;
  */
 public class JPAConnection {
     
-    public static final String MYSQL = "mysql_db";
-    public static final String CASSANDRA = "cassandra_db";
-            
-    public static final String DB = MYSQL;
     
-    private EntityManager entityManager;
-    public static final JPAConnection CONNECTION = new JPAConnection();
-    
-    public JPAConnection(){
-        if (entityManager == null) {
-            EntityManagerFactory emf;
-            if (DB.equals(MYSQL)) {
-                emf = Persistence.createEntityManagerFactory(MYSQL);
-            } else {
-                Map<String, String> propertyMap = new HashMap<>();
-                propertyMap.put(CassandraConstants.CQL_VERSION, CassandraConstants.CQL_VERSION_3_0);
-                emf = Persistence.createEntityManagerFactory(CASSANDRA, propertyMap);
-            }
-            entityManager = emf.createEntityManager();
-        }
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
-    }
     
 }

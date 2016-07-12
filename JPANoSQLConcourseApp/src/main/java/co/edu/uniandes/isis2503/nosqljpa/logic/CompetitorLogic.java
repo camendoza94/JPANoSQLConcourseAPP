@@ -28,6 +28,7 @@ import static co.edu.uniandes.isis2503.nosqljpa.model.dto.converter.CompetitorCo
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.CompetitorDTO;
 import co.edu.uniandes.isis2503.nosqljpa.persistence.CompetitorPersistence;
 import java.util.List;
+import java.util.UUID;
 
 /**
  *

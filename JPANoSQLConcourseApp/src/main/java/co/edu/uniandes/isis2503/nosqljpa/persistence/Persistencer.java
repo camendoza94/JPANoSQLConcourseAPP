@@ -45,7 +45,7 @@ public class Persistencer<T, PK> {
     
     
     public Persistencer(){
-        this.entityManager = JPAConnection.CONNECTION.getEntityManager();
+        
     }
 
     public T add(T entity) {
