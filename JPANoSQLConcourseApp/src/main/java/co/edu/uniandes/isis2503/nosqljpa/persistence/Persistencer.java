@@ -50,17 +50,10 @@ public class Persistencer<T, PK> {
     }
 
     public T add(T entity) {
-        EntityTransaction tx = null;
         try {
-            tx = entityManager.getTransaction();
-            tx.begin();
             entityManager.persist(entity);
-            tx.commit();
             entityManager.refresh(entity);
         } catch (RuntimeException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
             LOG.log(Level.WARNING, e.getMessage());
         }
         return entity;
@@ -68,16 +61,9 @@ public class Persistencer<T, PK> {
     }
 
     public T update(T entity) {
-        EntityTransaction tx = null;
         try {
-            tx = entityManager.getTransaction();
-            tx.begin();
             entityManager.merge(entity);
-            tx.commit();
         } catch (Exception e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
             LOG.log(Level.WARNING, e.getMessage());
         }
         return entity;
@@ -134,18 +120,11 @@ public class Persistencer<T, PK> {
     }
 
     public Boolean delete(T entity) {
-        EntityTransaction tx = null;
         try {
-            tx = entityManager.getTransaction();
-            tx.begin();
             entity = this.entityManager.merge(entity);
             this.entityManager.remove(entity);
-            tx.commit();
             return true;
         } catch (RuntimeException e) {
-            if (tx != null && tx.isActive()) {
-                tx.rollback();
-            }
             LOG.log(Level.WARNING, e.getMessage());
             return false;
         }
