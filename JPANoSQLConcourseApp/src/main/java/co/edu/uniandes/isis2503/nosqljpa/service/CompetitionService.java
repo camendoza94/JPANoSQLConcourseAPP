@@ -67,10 +67,10 @@ public class CompetitionService {
     @Path("{id}/add")
     public CompetitorDTO addCompetitor(@PathParam("id")String id ,CompetitorDTO dto) {
         CompetitionDTO competition = competitionLogic.find(id);
-        dto=competitorLogic.add(dto);
+        CompetitorDTO result=competitorLogic.add(dto);
         competition.addCompetitor(dto.getId());
         competitionLogic.update(competition);
-        return dto;
+        return result;
     }
 
     @PUT

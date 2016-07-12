@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class CompetitorLogic implements ICompetitorLogic {
 
-    private static CompetitorPersistence persistence;
+    private final CompetitorPersistence persistence;
 
     public CompetitorLogic() {
         this.persistence = new CompetitorPersistence();
@@ -43,14 +43,14 @@ public class CompetitorLogic implements ICompetitorLogic {
 
     @Override
     public CompetitorDTO add(CompetitorDTO dto) {
-        dto = CONVERTER.entityToDto(persistence.add(CONVERTER.dtoToEntity(dto)));
-        return dto;
+        CompetitorDTO result = CONVERTER.entityToDto(persistence.add(CONVERTER.dtoToEntity(dto)));
+        return result;
     }
 
     @Override
     public CompetitorDTO update(CompetitorDTO dto) {
-        dto = CONVERTER.entityToDto(persistence.update(CONVERTER.dtoToEntity(dto)));
-        return dto;
+        CompetitorDTO result = CONVERTER.entityToDto(persistence.update(CONVERTER.dtoToEntity(dto)));
+        return result;
     }
 
     @Override

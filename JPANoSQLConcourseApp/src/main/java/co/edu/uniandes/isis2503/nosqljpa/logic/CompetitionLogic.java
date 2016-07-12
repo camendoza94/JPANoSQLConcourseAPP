@@ -35,7 +35,7 @@ import co.edu.uniandes.isis2503.nosqljpa.persistence.CompetitionPersistence;
  */
 public class CompetitionLogic implements ICompetitionLogic{
 
-    private CompetitionPersistence persistence;
+    private final CompetitionPersistence persistence;
 
     public CompetitionLogic() {
         this.persistence = new CompetitionPersistence();
@@ -43,14 +43,14 @@ public class CompetitionLogic implements ICompetitionLogic{
 
     @Override
     public CompetitionDTO add(CompetitionDTO dto) {
-        dto = CONVERTER.entityToDto(persistence.add(CONVERTER.dtoToEntity(dto)));
-        return dto;
+        CompetitionDTO result = CONVERTER.entityToDto(persistence.add(CONVERTER.dtoToEntity(dto)));
+        return result;
     }
 
     @Override
     public CompetitionDTO update(CompetitionDTO dto) {
-        dto = CONVERTER.entityToDto(persistence.update(CONVERTER.dtoToEntity(dto)));
-        return dto;
+        CompetitionDTO result = CONVERTER.entityToDto(persistence.update(CONVERTER.dtoToEntity(dto)));
+        return result;
     }
 
     @Override
