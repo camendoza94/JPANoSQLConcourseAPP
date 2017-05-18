@@ -86,7 +86,7 @@
             <version>7.6.0.v20120127</version>
         </dependency>
         
-        <!--Aquí las dependencias necesarias-->
+        <!--TODO Aquí las dependencias necesarias según la guía-->
         
         
     </dependencies>

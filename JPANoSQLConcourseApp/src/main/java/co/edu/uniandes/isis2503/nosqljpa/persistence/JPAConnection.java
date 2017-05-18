@@ -35,6 +35,7 @@ import javax.persistence.Persistence;
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
 public class JPAConnection {
-   
+    
+    //TODO Agregar código según la guía
     
 }
