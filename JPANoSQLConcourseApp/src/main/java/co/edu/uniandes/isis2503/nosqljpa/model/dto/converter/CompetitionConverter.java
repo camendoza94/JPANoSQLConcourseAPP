@@ -48,7 +48,7 @@ public class CompetitionConverter implements ICompetitionConverter{
         dto.setCity(entity.getCity());
         dto.setCountry(entity.getCountry());
         dto.setPrize(entity.getPrize());
-        dto.setYear(entity.getYear());
+        dto.setYear(entity.getYearC());
         dto.setCompetitors(entity.getCompetitors());
         dto.setWinnerId(entity.getWinnerId());
         return dto;
@@ -62,7 +62,7 @@ public class CompetitionConverter implements ICompetitionConverter{
         entity.setCity(dto.getCity());
         entity.setCountry(dto.getCountry());
         entity.setPrize(dto.getPrize());
-        entity.setYear(dto.getYear());
+        entity.setYearC(dto.getYear());
         entity.setCompetitors(dto.getCompetitors());
         entity.setWinnerId(dto.getWinnerId());
 

@@ -86,23 +86,7 @@
             <version>7.6.0.v20120127</version>
         </dependency>
         
-        
-        <!-- ##### JPA Poliglota Kundera -->
-        <dependency>
-            <groupId>com.impetus.kundera.client</groupId>
-            <artifactId>kundera-cassandra-ds-driver</artifactId>
-            <version>3.5</version>
-        </dependency>
-        <dependency>
-            <groupId>com.impetus.kundera.client</groupId>
-            <artifactId>kundera-rdbms</artifactId>
-            <version>3.5</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.1.7.Final</version>
-        </dependency>
+        <!--Aquí las dependencias necesarias-->
         
         
     </dependencies>

@@ -32,6 +32,7 @@ import javax.persistence.Table;
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
+//Aquí anotaciones de entidad
 
 public class CompetitorEntity implements Serializable{
 
