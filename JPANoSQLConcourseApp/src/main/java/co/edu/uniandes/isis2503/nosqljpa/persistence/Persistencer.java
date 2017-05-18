@@ -45,13 +45,16 @@ public class Persistencer<T, PK> {
     
     
     public Persistencer(){
-        
+        this.entityManager = JPAConnection.CONNECTION.getEntityManager();
     }
 
     public T add(T entity) {
         try {
+            
+            entityManager.getTransaction().begin();
             entityManager.persist(entity);
-            entityManager.refresh(entity);
+            entityManager.getTransaction().commit();
+            
         } catch (RuntimeException e) {
             LOG.log(Level.WARNING, e.getMessage());
         }

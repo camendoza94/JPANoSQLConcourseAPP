@@ -35,7 +35,8 @@ import javax.persistence.Table;
  *
  * @author Luis Felipe Mendivelso Osorio <lf.mendivelso10@uniandes.edu.co>
  */
-
+@Entity
+@Table(name = "COMPETITION")
 public class CompetitionEntity implements Serializable{
 
     @Id
@@ -43,7 +44,7 @@ public class CompetitionEntity implements Serializable{
     private String name;
     private String city;
     private String country;
-    private String year;
+    private String yearC;
     @ElementCollection
     private List<String> competitors;
     private long winnerId;
@@ -58,7 +59,7 @@ public class CompetitionEntity implements Serializable{
         this.name = name;
         this.city = city;
         this.country = country;
-        this.year = year;
+        this.yearC = year;
         this.competitors = competitors;
         this.winnerId = winnerId;
         this.prize = prize;
@@ -96,12 +97,12 @@ public class CompetitionEntity implements Serializable{
         this.country = country;
     }
 
-    public String getYear() {
-        return year;
+    public String getYearC() {
+        return yearC;
     }
 
-    public void setYear(String year) {
-        this.year = year;
+    public void setYearC(String year) {
+        this.yearC = year;
     }
 
     public long getWinnerId() {
