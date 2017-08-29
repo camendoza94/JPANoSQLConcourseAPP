@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-The MIT License
-
-Copyright 2016 Universidad De Los Andes - Departamento de Ingeniería de Sistemas.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
--->
-<!--TODO Sobreescribir el archivo para ser igual al mostrado en la guía-->
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence     http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="cassandra_db" transaction-type="RESOURCE_LOCAL">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity</class>
+        <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="9160"/>
+            <property name="kundera.keyspace" value="concourse"/>
+            <property name="kundera.dialect" value="cassandra"/>
+            <property name="kundera.client.lookup.class" value="com.impetus.client.cassandra.thrift.ThriftClientFactory"/>
+            <property name="kundera.pool.size.min.idle" value="25"/>
+            <property name="kundera.pool.size.max.idle" value="100"/>
+            <property name="kundera.pool.size.max.active" value="100"/>
+            <property name="kundera.pool.size.max.total" value="100"/>
+            <property name="kundera.ddl.auto.prepare" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="mongo_db" transaction-type="RESOURCE_LOCAL">
+        <provider>com.impetus.kundera.KunderaPersistence</provider>
+        <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity</class>
+        <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="kundera.nodes" value="localhost"/>
+            <property name="kundera.port" value="27017"/>
+            <property name="kundera.keyspace" value="concourse"/>
+            <property name="kundera.dialect" value="mongodb"/>
+            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.pool.size.min.idle" value="25"/>
+            <property name="kundera.pool.size.max.idle" value="100"/>
+            <property name="kundera.pool.size.max.active" value="100"/>
+            <property name="kundera.pool.size.max.total" value="100"/>
+            <property name="kundera.ddl.auto.prepare" value="create-drop"/>
+        </properties>
+    </persistence-unit>
+</persistence>

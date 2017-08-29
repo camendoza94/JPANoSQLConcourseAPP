@@ -46,7 +46,7 @@ public class Persistencer<T, PK> {
     
     public Persistencer(){
         
-        //TODO Agregar código según la guía
+        this.entityManager = JPAConnection.CONNECTION.getEntityManager();
         
     }
 

@@ -23,25 +23,6 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
-    <repositories>
-        <repository>
-            <id>sonatype-nexus</id>
-            <name>Kundera Public Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/releases</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>riptano</id>
-            <name>riptano</name>
-            <url>http://mvn.riptano.com/content/repositories/public</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <!-- ##### Java Web Support ##### -->
@@ -86,9 +67,33 @@
             <version>7.6.0.v20120127</version>
         </dependency>
         
-        <!--TODO Aquí las dependencias necesarias según la guía-->
+        <dependency>
+            <groupId>com.impetus.kundera.client</groupId>
+            <artifactId>kundera-cassandra-ds-driver</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.impetus.kundera.client</groupId>
+            <artifactId>kundera-rdbms</artifactId>
+            <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.1.7.Final</version>
+        </dependency>        
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.10.2.0</version>
+        </dependency>
         
-        
+        <dependency>
+         <groupId>com.impetus.kundera.client</groupId>
+         <artifactId>kundera-mongo</artifactId>
+         <version>3.5</version>
+        </dependency>
+                
     </dependencies>
 
     <build>

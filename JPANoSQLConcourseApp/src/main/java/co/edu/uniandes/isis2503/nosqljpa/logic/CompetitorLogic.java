@@ -44,9 +44,11 @@ public class CompetitorLogic implements ICompetitorLogic {
 
     @Override
     public CompetitorDTO add(CompetitorDTO dto) {
-        
-        //TODO Agregar código según la guía
-        
+         if(dto.getId()==null){
+            dto.setId(UUID.randomUUID().toString());
+         }
+        CompetitorDTO result = CONVERTER.entityToDto(persistence.add(CONVERTER.dtoToEntity(dto)));
+        return result;
     }
 
     @Override
