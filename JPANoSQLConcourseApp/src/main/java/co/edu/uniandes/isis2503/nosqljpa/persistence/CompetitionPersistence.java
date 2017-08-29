@@ -33,6 +33,7 @@ import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitionEntity;
 public class CompetitionPersistence extends Persistencer<CompetitionEntity, String>{
 
     public CompetitionPersistence(){
+        super(JPAConnectionMongo.MONGO);
         this.entityClass = CompetitionEntity.class;
     }
 

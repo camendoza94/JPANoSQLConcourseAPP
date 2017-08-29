@@ -34,6 +34,7 @@ import co.edu.uniandes.isis2503.nosqljpa.model.entity.CompetitorEntity;
 public class CompetitorPersistence extends Persistencer<CompetitorEntity,String> {
     
     public CompetitorPersistence(){
+        super(JPAConnectionCassandra.CASSANDRA);
         this.entityClass = CompetitorEntity.class;
     }
     

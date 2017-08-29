@@ -44,10 +44,11 @@ public class Persistencer<T, PK> {
     protected EntityManager entityManager;
     
     
-    public Persistencer(){
-        
-        this.entityManager = JPAConnection.CONNECTION.getEntityManager();
-        
+    public Persistencer(String DB){
+        if(DB.equals(JPAConnectionMongo.MONGO))
+            this.entityManager = JPAConnectionMongo.CONNECTION.getEntityManager();
+        else if(DB.equals(JPAConnectionCassandra.CASSANDRA))
+            this.entityManager = JPAConnectionCassandra.CONNECTION.getEntityManager();
     }
 
     public T add(T entity) {
