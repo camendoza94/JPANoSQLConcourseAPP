@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>co.edu.uniandes.isis2503.nosqljpa</groupId>
-    <artifactId>JPANoSQLConcourseApp</artifactId>
+    <artifactId>JPANoSQLThermalComfortApp</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>JPANoSQLConcourseApp</name>
+    <name>JPANoSQLThermalComfortApp</name>
     <organization>
         <name>Universidad De Los Andes - Departamento de Ingeniería de Sistemas</name>
         <url>sistemas.uniandes.edu.co</url>
@@ -16,6 +16,10 @@
         <developer>
             <name>Luis Felipe Mendivelso Osorio</name>
             <email>lf.mendivelso10@uniandes.edu.co</email>
+        </developer>
+        <developer>
+            <name>Camilo Andres Mendoza Arrieta</name>
+            <email>ca.mendoza968@uniandes.edu.co</email>
         </developer>
     </developers>
 
