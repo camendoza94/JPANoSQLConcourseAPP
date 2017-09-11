@@ -44,11 +44,10 @@ public class Persistencer<T, PK> {
     protected EntityManager entityManager;
     
     
-    public Persistencer(String DB){
-        if(DB.equals(JPAConnectionMongo.MONGO))
-            this.entityManager = JPAConnectionMongo.CONNECTION.getEntityManager();
-        else if(DB.equals(JPAConnectionCassandra.CASSANDRA))
-            this.entityManager = JPAConnectionCassandra.CONNECTION.getEntityManager();
+    public Persistencer(){
+        
+        this.entityManager = JPAConnection.CONNECTION.getEntityManager();
+        
     }
 
     public T add(T entity) {
@@ -78,32 +77,6 @@ public class Persistencer<T, PK> {
         T entity;
         try {
             entity = entityManager.find(entityClass, id);
-        } catch (NoResultException | NonUniqueResultException e) {
-            entity = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return entity;
-    }
-
-    public T findByName(String name) {
-        T entity;
-        Query query = entityManager.createQuery("Select e FROM " + entityClass.getSimpleName() + " e WHERE e.name = :name");
-        query.setParameter("name", name);
-        try {
-            entity = (T) query.getSingleResult();
-        } catch (NoResultException | NonUniqueResultException e) {
-            entity = null;
-            LOG.log(Level.WARNING, e.getMessage());
-        }
-        return entity;
-    }
-
-    public T findByEmail(String email) {
-        T entity;
-        Query query = entityManager.createQuery("Select e FROM " + entityClass.getSimpleName() + " e WHERE e.email = :email");
-        query.setParameter("email", email);
-        try {
-            entity = (T) query.getSingleResult();
         } catch (NoResultException | NonUniqueResultException e) {
             entity = null;
             LOG.log(Level.WARNING, e.getMessage());

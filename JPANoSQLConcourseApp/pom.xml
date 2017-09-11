@@ -66,12 +66,6 @@
             <artifactId>jetty-webapp</artifactId>
             <version>7.6.0.v20120127</version>
         </dependency>
-        
-        <dependency>
-            <groupId>com.impetus.kundera.client</groupId>
-            <artifactId>kundera-cassandra-ds-driver</artifactId>
-            <version>3.5</version>
-        </dependency>
         <dependency>
             <groupId>com.impetus.kundera.client</groupId>
             <artifactId>kundera-rdbms</artifactId>
