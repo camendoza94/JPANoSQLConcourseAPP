@@ -27,7 +27,7 @@
             <property name="hibernate.c3p0.idle_test_period" value="3000" />
         </properties>
     </persistence-unit>
-    <persistence-unit name="mongo_db" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="cassandra_db" transaction-type="RESOURCE_LOCAL">
         <provider>com.impetus.kundera.KunderaPersistence</provider>
         <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.FloorEntity</class>
         <class>co.edu.uniandes.isis2503.nosqljpa.model.entity.RoomEntity</class>
@@ -38,10 +38,10 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="kundera.nodes" value="localhost"/>
-            <property name="kundera.port" value="27017"/>
-            <property name="kundera.keyspace" value="temperature"/>
-            <property name="kundera.dialect" value="mongodb"/>
-            <property name="kundera.client.lookup.class" value="com.impetus.client.mongodb.MongoDBClientFactory"/>
+            <property name="kundera.port" value="9160"/>
+            <property name="kundera.keyspace" value="concourse"/>
+            <property name="kundera.dialect" value="cassandra"/>
+            <property name="kundera.client.lookup.class" value="com.impetus.client.cassandra.thrift.ThriftClientFactory"/>
             <property name="kundera.pool.size.min.idle" value="25"/>
             <property name="kundera.pool.size.max.idle" value="100"/>
             <property name="kundera.pool.size.max.active" value="100"/>

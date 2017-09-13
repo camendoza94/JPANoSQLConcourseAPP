@@ -87,9 +87,9 @@
         </dependency>
         
         <dependency>
-         <groupId>com.impetus.kundera.client</groupId>
-         <artifactId>kundera-mongo</artifactId>
-         <version>3.5</version>
+            <groupId>com.impetus.kundera.client</groupId>
+            <artifactId>kundera-cassandra-ds-driver</artifactId>
+            <version>3.5</version>
         </dependency>
                 
     </dependencies>
