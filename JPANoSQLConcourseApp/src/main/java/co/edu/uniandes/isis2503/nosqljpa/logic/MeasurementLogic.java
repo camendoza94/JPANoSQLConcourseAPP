@@ -68,7 +68,7 @@ public class MeasurementLogic implements IMeasurementLogic {
     }
 
     @Override
-    public Boolean delete(MeasurementDTO dto) {
-        return persistence.delete(CONVERTER.dtoToEntity(dto));
+    public Boolean delete(String id) {
+        return persistence.delete(id);
     }
 }

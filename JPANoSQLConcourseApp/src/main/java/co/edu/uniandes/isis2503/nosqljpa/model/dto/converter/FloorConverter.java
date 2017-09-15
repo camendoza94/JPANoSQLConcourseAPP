@@ -44,6 +44,8 @@ public class FloorConverter implements IFloorConverter {
     public FloorDTO entityToDto(FloorEntity entity) {
         FloorDTO dto = new FloorDTO();
         dto.setId(entity.getId());
+        dto.setName(entity.getName());
+        dto.setCode(entity.getCode());
         dto.setRooms(entity.getRooms());
         return dto;
     }
@@ -52,6 +54,8 @@ public class FloorConverter implements IFloorConverter {
     public FloorEntity dtoToEntity(FloorDTO dto) {
         FloorEntity entity = new FloorEntity();
         entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setCode(dto.getCode());
         entity.setRooms(dto.getRooms());
         return entity;
     }

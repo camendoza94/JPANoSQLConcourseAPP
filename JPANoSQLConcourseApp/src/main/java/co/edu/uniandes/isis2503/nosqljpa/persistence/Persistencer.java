@@ -30,6 +30,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
+import org.hibernate.Criteria;
 
 /**
  *
@@ -42,21 +43,20 @@ public class Persistencer<T, PK> {
     private static final Logger LOG = Logger.getLogger(Persistencer.class.getName());
     protected Class<T> entityClass;
     protected EntityManager entityManager;
-    
-    
-    public Persistencer(){
-        
+
+    public Persistencer() {
+
         this.entityManager = JPAConnection.CONNECTION.getEntityManager();
-        
+
     }
 
     public T add(T entity) {
         try {
-            
+
             entityManager.getTransaction().begin();
             entityManager.persist(entity);
             entityManager.getTransaction().commit();
-            
+
         } catch (RuntimeException e) {
             LOG.log(Level.WARNING, e.getMessage());
         }
@@ -97,15 +97,29 @@ public class Persistencer<T, PK> {
         return entities;
     }
 
-    public Boolean delete(T entity) {
+    public Boolean delete(PK id) {
         try {
-            entity = this.entityManager.merge(entity);
+            T entity = entityManager.find(entityClass, id);
+            entityManager.getTransaction().begin();
             this.entityManager.remove(entity);
+            entityManager.getTransaction().commit();
             return true;
         } catch (RuntimeException e) {
             LOG.log(Level.WARNING, e.getMessage());
             return false;
         }
     }
-    
+
+    public T findCode(String code) {
+        T entity;
+        String queryString = "Select c FROM " + entityClass.getSimpleName() + " c where c.code = :code1";
+        Query query = entityManager.createQuery(queryString).setParameter("code1", code);
+        try {
+            entity = (T) query.getSingleResult();
+        } catch (NoResultException | NonUniqueResultException e) {
+            entity = null;
+            LOG.log(Level.WARNING, e.getMessage());
+        }
+        return entity;
+    }
 }

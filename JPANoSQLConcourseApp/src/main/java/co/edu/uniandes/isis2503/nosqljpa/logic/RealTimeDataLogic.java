@@ -67,7 +67,7 @@ public class RealTimeDataLogic implements IRealTimeDataLogic {
     }
 
     @Override
-    public Boolean delete(RealTimeDataDTO dto) {
-        return persistence.delete(CONVERTER.dtoToEntity(dto));
+    public Boolean delete(String id) {
+        return persistence.delete(id);
     }
 }

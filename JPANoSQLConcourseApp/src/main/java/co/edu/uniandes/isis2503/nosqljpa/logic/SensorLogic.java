@@ -61,6 +61,11 @@ public class SensorLogic implements ISensorLogic {
     public SensorDTO find(String id) {
         return CONVERTER.entityToDto(persistence.find(id));
     }
+    
+    @Override
+    public SensorDTO findCode(String code) {
+        return CONVERTER.entityToDto(persistence.findCode(code));
+    }
 
     @Override
     public List<SensorDTO> all() {
@@ -68,7 +73,7 @@ public class SensorLogic implements ISensorLogic {
     }
 
     @Override
-    public Boolean delete(SensorDTO dto) {
-        return persistence.delete(CONVERTER.dtoToEntity(dto));
+    public Boolean delete(String id) {
+        return persistence.delete(id);
     }
 }

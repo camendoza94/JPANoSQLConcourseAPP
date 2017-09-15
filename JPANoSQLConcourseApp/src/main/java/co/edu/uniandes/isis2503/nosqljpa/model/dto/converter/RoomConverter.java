@@ -45,6 +45,7 @@ public class RoomConverter implements IRoomConverter {
         RoomDTO dto = new RoomDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
+        dto.setCode(entity.getCode());
         dto.setConsolidatedData(entity.getConsolidatedData());
         dto.setSensors(entity.getSensors());
         return dto;
@@ -55,6 +56,7 @@ public class RoomConverter implements IRoomConverter {
         RoomEntity entity = new RoomEntity();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
+        entity.setCode(dto.getCode());
         entity.setSensors(dto.getSensors());
         entity.setConsolidatedData(dto.getConsolidatedData());
         return entity;

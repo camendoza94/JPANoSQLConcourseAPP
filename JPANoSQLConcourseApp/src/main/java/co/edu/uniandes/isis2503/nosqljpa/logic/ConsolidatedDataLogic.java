@@ -67,7 +67,7 @@ public class ConsolidatedDataLogic implements IConsolidatedDataLogic {
     }
 
     @Override
-    public Boolean delete(ConsolidatedDataDTO dto) {
-        return persistence.delete(CONVERTER.dtoToEntity(dto));
+    public Boolean delete(String id) {
+        return persistence.delete(id);
     }
 }

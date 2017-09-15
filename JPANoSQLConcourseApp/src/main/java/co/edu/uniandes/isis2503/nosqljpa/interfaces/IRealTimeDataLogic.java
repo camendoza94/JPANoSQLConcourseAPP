@@ -35,5 +35,5 @@ public interface IRealTimeDataLogic {
     public RealTimeDataDTO update(RealTimeDataDTO dto);
     public RealTimeDataDTO find(String id);
     public List<RealTimeDataDTO> all();
-    public Boolean delete(RealTimeDataDTO dto);
+    public Boolean delete(String id);
 }

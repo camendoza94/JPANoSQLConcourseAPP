@@ -35,5 +35,5 @@ public interface IConsolidatedDataLogic {
     public ConsolidatedDataDTO update(ConsolidatedDataDTO dto);
     public ConsolidatedDataDTO find(String id);
     public List<ConsolidatedDataDTO> all();
-    public Boolean delete(ConsolidatedDataDTO dto);
+    public Boolean delete(String id);
 }

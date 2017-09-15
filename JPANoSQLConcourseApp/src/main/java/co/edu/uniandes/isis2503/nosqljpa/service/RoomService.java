@@ -68,10 +68,11 @@ public class RoomService {
     }
 
     @POST
-    @Path("{id}/measurements/{idMeasurement}/addCD")
-    public ConsolidatedDataDTO addConsolidatedData(@PathParam("id") String id, @PathParam("idMeasurement") String idMeasure, ConsolidatedDataDTO dto) {
-        RoomDTO room = roomLogic.find(id);
-        dto.setMeasurementID(idMeasure);
+    @Path("{code}/consolidateddata")
+    public ConsolidatedDataDTO addConsolidatedData(@PathParam("code") String code, ConsolidatedDataDTO dto) {
+        RoomDTO room = roomLogic.findCode(code);
+        //Find the id of the measurement associated with the first sensor on the room
+        dto.setMeasurementID(sensorLogic.find(room.getSensors().get(0)).getMeasurements().get(0));
         ConsolidatedDataDTO result = consolidateddataLogic.add(dto);
         room.addConsolidatedData(dto.getId());
         roomLogic.update(room);
@@ -79,9 +80,9 @@ public class RoomService {
     }
     
     @POST
-    @Path("{id}/addSensor")
-    public SensorDTO addSensor(@PathParam("id") String id, SensorDTO dto) {
-        RoomDTO room = roomLogic.find(id);
+    @Path("{code}/sensors")
+    public SensorDTO addSensor(@PathParam("code") String code, SensorDTO dto) {
+        RoomDTO room = roomLogic.findCode(code);
         SensorDTO result = sensorLogic.add(dto);
         room.addSensor(dto.getId());
         roomLogic.update(room);
@@ -105,9 +106,10 @@ public class RoomService {
     }
 
     @DELETE
-    public Response delete(RoomDTO dto) {
+    @Path("/{id}")
+    public Response delete(@PathParam("id") String id) {
         try {
-            roomLogic.delete(dto);
+            roomLogic.delete(id);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Sucessful: Room was deleted").build();
         } catch (Exception e) {
             Logger.getLogger(RoomService.class).log(Level.WARNING, e.getMessage());

@@ -23,9 +23,11 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.model.entity;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.DynamicUpdate;
 
 /**
  *
@@ -34,7 +36,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "MEASUREMENT")
-public class MeasurementEntity {
+public class MeasurementEntity implements Serializable {
     @Id
     private String id;
     

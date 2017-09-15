@@ -68,10 +68,10 @@ public class SensorService {
     }
 
     @POST
-    @Path("{id}/addRTD")
-    public RealTimeDataDTO addRealTimeData(@PathParam("id") String id, RealTimeDataDTO dto) {
-        SensorDTO sensor = sensorLogic.find(id);
-        dto.setIdSensor(id);
+    @Path("{code}/realtimedata")
+    public RealTimeDataDTO addRealTimeData(@PathParam("code") String code, RealTimeDataDTO dto) {
+        SensorDTO sensor = sensorLogic.findCode(code);
+        dto.setIdSensor(sensor.getId());
         RealTimeDataDTO result = realtimedataLogic.add(dto);
         sensor.addRealTimeData(dto.getId());
         sensorLogic.update(sensor);
@@ -79,9 +79,9 @@ public class SensorService {
     }
     
     @POST
-    @Path("{id}/addMeasurement")
-    public MeasurementDTO addMeasurement(@PathParam("id") String id, MeasurementDTO dto) {
-        SensorDTO sensor = sensorLogic.find(id);
+    @Path("{code}/measurements")
+    public MeasurementDTO addMeasurement(@PathParam("code") String code, MeasurementDTO dto) {
+        SensorDTO sensor = sensorLogic.findCode(code);
         MeasurementDTO result = measurementLogic.add(dto);
         sensor.addMeasurement(dto.getId());
         sensorLogic.update(sensor);
@@ -105,9 +105,10 @@ public class SensorService {
     }
 
     @DELETE
-    public Response delete(SensorDTO dto) {
+    @Path("/{id}")
+    public Response delete(@PathParam("id") String id) {
         try {
-            sensorLogic.delete(dto);
+            sensorLogic.delete(id);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Sucessful: Sensor was deleted").build();
         } catch (Exception e) {
             Logger.getLogger(SensorService.class).log(Level.WARNING, e.getMessage());

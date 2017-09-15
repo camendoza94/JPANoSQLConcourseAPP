@@ -67,7 +67,12 @@ public class RoomLogic implements IRoomLogic {
     }
 
     @Override
-    public Boolean delete(RoomDTO dto) {
-        return persistence.delete(CONVERTER.dtoToEntity(dto));
-    }    
+    public Boolean delete(String id) {
+        return persistence.delete(id);
+    }
+
+    @Override
+    public RoomDTO findCode(String code) {
+        return CONVERTER.entityToDto(persistence.findCode(code));
+    }
 }

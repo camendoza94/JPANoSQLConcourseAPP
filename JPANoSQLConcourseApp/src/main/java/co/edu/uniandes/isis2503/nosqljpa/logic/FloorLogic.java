@@ -61,6 +61,11 @@ public class FloorLogic implements IFloorLogic{
     public FloorDTO find(String id) {
         return CONVERTER.entityToDto(persistence.find(id));
     }
+    
+    @Override
+    public FloorDTO findCode(String code) {
+        return CONVERTER.entityToDto(persistence.findCode(code));
+    }
 
     @Override
     public List<FloorDTO> all() {
@@ -68,7 +73,7 @@ public class FloorLogic implements IFloorLogic{
     }
 
     @Override
-    public Boolean delete(FloorDTO dto) {
-        return persistence.delete(CONVERTER.dtoToEntity(dto));
+    public Boolean delete(String id) {
+        return persistence.delete(id);
     }
 }

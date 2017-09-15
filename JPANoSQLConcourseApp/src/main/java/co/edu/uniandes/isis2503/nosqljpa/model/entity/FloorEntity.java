@@ -30,6 +30,7 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.hibernate.annotations.DynamicUpdate;
 
 /**
  *
@@ -41,6 +42,10 @@ public class FloorEntity implements Serializable {
 
     @Id
     private String id;
+    
+    private String name;
+    
+    private String code;
 
     @ElementCollection
     private List<String> rooms;
@@ -49,9 +54,27 @@ public class FloorEntity implements Serializable {
         this.rooms = new ArrayList();
     }
 
-    public FloorEntity(String id, List<String> rooms) {
+    public FloorEntity(String id, String name, String code, List<String> rooms) {
         this.id = id;
+        this.name = name;
+        this.code = code;
         this.rooms = rooms;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {

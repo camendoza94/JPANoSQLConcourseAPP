@@ -34,6 +34,7 @@ public interface ISensorLogic {
     public SensorDTO add(SensorDTO dto);
     public SensorDTO update(SensorDTO dto);
     public SensorDTO find(String id);
+    public SensorDTO findCode(String code);
     public List<SensorDTO> all();
-    public Boolean delete(SensorDTO dto);   
+    public Boolean delete(String id);
 }

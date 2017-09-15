@@ -37,6 +37,7 @@ public class RoomDTO {
      @Id
     private String id;
     private String name;
+    private String code;
     private List<String> consolidatedData;
     private List<String> sensors;
 
@@ -45,11 +46,20 @@ public class RoomDTO {
         sensors =  new ArrayList();
     }
 
-    public RoomDTO(String id, String name, List<String> consolidatedData, List<String> sensors) {
+    public RoomDTO(String id, String name, String code, List<String> consolidatedData, List<String> sensors) {
         this.id = id;
         this.name = name;
+        this.code = code;
         this.consolidatedData = consolidatedData;
         this.sensors = sensors;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getId() {

@@ -49,11 +49,11 @@ import javax.ws.rs.core.Response;
 @Path("/floors")
 @Produces(MediaType.APPLICATION_JSON)
 public class FloorService {
-    
+
     private final IFloorLogic floorLogic;
     private final IRoomLogic roomLogic;
-    
-    public FloorService(){
+
+    public FloorService() {
         this.floorLogic = new FloorLogic();
         this.roomLogic = new RoomLogic();
     }
@@ -62,12 +62,12 @@ public class FloorService {
     public FloorDTO add(FloorDTO dto) {
         return floorLogic.add(dto);
     }
-    
+
     @POST
-    @Path("{id}/add")
-    public RoomDTO addRoom(@PathParam("id")String id ,RoomDTO dto) {
-        FloorDTO floor = floorLogic.find(id);
-        RoomDTO result=roomLogic.add(dto);
+    @Path("{code}/rooms")
+    public RoomDTO addRoom(@PathParam("code") String code, RoomDTO dto) {
+        FloorDTO floor = floorLogic.findCode(code);
+        RoomDTO result = roomLogic.add(dto);
         floor.addRoom(dto.getId());
         floorLogic.update(floor);
         return result;
@@ -90,9 +90,10 @@ public class FloorService {
     }
 
     @DELETE
-    public Response delete(FloorDTO dto) {
+    @Path("/{id}")
+    public Response delete(@PathParam("id") String id) {
         try {
-            floorLogic.delete(dto);
+            floorLogic.delete(id);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Sucessful: Floor was deleted").build();
         } catch (Exception e) {
             Logger.getLogger(FloorService.class).log(Level.WARNING, e.getMessage());

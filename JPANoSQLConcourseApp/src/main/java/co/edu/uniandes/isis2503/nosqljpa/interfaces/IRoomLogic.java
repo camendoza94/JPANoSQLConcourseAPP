@@ -34,6 +34,7 @@ public interface IRoomLogic {
     public RoomDTO add(RoomDTO dto);
     public RoomDTO update(RoomDTO dto);
     public RoomDTO find(String id);
+    public RoomDTO findCode(String code);
     public List<RoomDTO> all();
-    public Boolean delete(RoomDTO dto);
+    public Boolean delete(String id);
 }

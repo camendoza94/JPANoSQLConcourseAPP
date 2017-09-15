@@ -35,5 +35,5 @@ public interface IMeasurementLogic {
     public MeasurementDTO update(MeasurementDTO dto);
     public MeasurementDTO find(String id);
     public List<MeasurementDTO> all();
-    public Boolean delete(MeasurementDTO dto);
+    public Boolean delete(String id);
 }
