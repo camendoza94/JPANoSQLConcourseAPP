@@ -38,16 +38,26 @@ public class ConsolidatedDataDTO {
     private Date dateInit;
     private Date dateEnd;
     private String measurementID;
+    private String roomID;
 
     public ConsolidatedDataDTO() {
     }
 
-    public ConsolidatedDataDTO(String id, double dataValue, Date dateInit, Date dateEnd, String measurementID) {
+    public ConsolidatedDataDTO(String id, double dataValue, Date dateInit, Date dateEnd, String measurementID, String roomID) {
         this.id = id;
         this.dataValue = dataValue;
         this.dateInit = dateInit;
         this.dateEnd = dateEnd;
         this.measurementID = measurementID;
+        this.roomID = roomID;
+    }
+
+    public String getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
     }
 
     public String getMeasurementID() {

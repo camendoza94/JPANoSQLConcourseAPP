@@ -78,6 +78,13 @@ public class SensorService {
         return result;
     }
     
+    @GET
+    @Path("{code}/realtimedata")
+    public List<RealTimeDataDTO> getRealTimeData(@PathParam("code") String code) {
+        SensorDTO sensor = sensorLogic.findCode(code);
+        return realtimedataLogic.findBySensorId(sensor.getId());
+    }
+    
     @POST
     @Path("{code}/measurements")
     public MeasurementDTO addMeasurement(@PathParam("code") String code, MeasurementDTO dto) {

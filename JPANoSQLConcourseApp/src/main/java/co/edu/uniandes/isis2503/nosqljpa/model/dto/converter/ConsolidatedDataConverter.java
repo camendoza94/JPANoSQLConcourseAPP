@@ -48,6 +48,7 @@ public class ConsolidatedDataConverter implements IConsolidatedDataConverter {
         dto.setDateInit(entity.getDateInit());
         dto.setDateEnd(entity.getDateEnd());
         dto.setMeasurementID(entity.getMeasurementID());
+        dto.setRoomID(entity.getRoomID());
         return dto;
     }
 
@@ -59,6 +60,7 @@ public class ConsolidatedDataConverter implements IConsolidatedDataConverter {
         entity.setDateInit(dto.getDateInit());
         entity.setDateEnd(dto.getDateEnd());
         entity.setMeasurementID(dto.getMeasurementID());
+        entity.setRoomID(dto.getRoomID());
         return entity;
     }
 

@@ -73,10 +73,18 @@ public class RoomService {
         RoomDTO room = roomLogic.findCode(code);
         //Find the id of the measurement associated with the first sensor on the room
         dto.setMeasurementID(sensorLogic.find(room.getSensors().get(0)).getMeasurements().get(0));
+        dto.setRoomID(room.getId());
         ConsolidatedDataDTO result = consolidateddataLogic.add(dto);
         room.addConsolidatedData(dto.getId());
         roomLogic.update(room);
         return result;
+    }
+    
+    @GET
+    @Path("{code}/consolidateddata")
+    public List<ConsolidatedDataDTO> getConsolidatedData(@PathParam("code") String code) {
+        RoomDTO room = roomLogic.findCode(code);
+        return consolidateddataLogic.findByRoomId(room.getId());
     }
     
     @POST

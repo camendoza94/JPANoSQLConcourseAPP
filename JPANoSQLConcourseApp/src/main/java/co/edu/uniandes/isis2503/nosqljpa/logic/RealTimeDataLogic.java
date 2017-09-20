@@ -60,6 +60,11 @@ public class RealTimeDataLogic implements IRealTimeDataLogic {
     public RealTimeDataDTO find(String id) {
         return CONVERTER.entityToDto(persistence.find(id));
     }
+    
+    @Override
+    public List<RealTimeDataDTO> findBySensorId(String id) {
+        return CONVERTER.listEntitiesToListDTOs(persistence.findBySensorId(id));
+    }
 
     @Override
     public List<RealTimeDataDTO> all() {

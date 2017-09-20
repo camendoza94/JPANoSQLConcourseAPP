@@ -34,6 +34,7 @@ public interface IRealTimeDataLogic {
     public RealTimeDataDTO add(RealTimeDataDTO dto);
     public RealTimeDataDTO update(RealTimeDataDTO dto);
     public RealTimeDataDTO find(String id);
+    public List<RealTimeDataDTO> findBySensorId(String id);
     public List<RealTimeDataDTO> all();
     public Boolean delete(String id);
 }

@@ -55,6 +55,11 @@ public class ConsolidatedDataLogic implements IConsolidatedDataLogic {
         ConsolidatedDataDTO result = CONVERTER.entityToDto(persistence.update(CONVERTER.dtoToEntity(dto)));
         return result;
     }
+    
+    @Override
+    public List<ConsolidatedDataDTO> findByRoomId(String id) {
+        return CONVERTER.listEntitiesToListDTOs(persistence.findByRoomId(id));
+    }
 
     @Override
     public ConsolidatedDataDTO find(String id) {
