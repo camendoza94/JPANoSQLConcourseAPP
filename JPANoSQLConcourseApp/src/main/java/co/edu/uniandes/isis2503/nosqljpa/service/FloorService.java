@@ -83,7 +83,6 @@ public class FloorService {
     public FloorDTO find(@PathParam("id") String id) {
         return floorLogic.find(id);
     }
-
     @GET
     public List<FloorDTO> all() {
         return floorLogic.all();
