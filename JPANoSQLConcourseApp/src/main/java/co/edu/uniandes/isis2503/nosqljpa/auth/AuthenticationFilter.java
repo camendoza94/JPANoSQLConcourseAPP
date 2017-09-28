@@ -31,8 +31,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.RSAKeyProvider;
-import com.sun.jersey.spi.container.ContainerRequest;
-import com.sun.jersey.spi.container.ContainerRequestFilter;
+import java.io.IOException;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -45,6 +44,8 @@ import java.util.logging.Logger;
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
@@ -58,7 +59,7 @@ import javax.ws.rs.ext.Provider;
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
-    private static final String AUTHENTICATION_SCHEME = "Bearer";
+    public static final String AUTHENTICATION_SCHEME = "Bearer";
 
     final JwkProvider provider = new UrlJwkProvider("https://arquisoft20172.auth0.com/.well-known/jwks.json");
     final String privateKeyId = "PK";
@@ -105,7 +106,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         try {//Cambiar por variables de entorno
             JWTVerifier verifier = JWT.require(algorithm)
                     .withIssuer("https://arquisoft20172.auth0.com/")
-                    .withAudience("uniandes.edu.co/thermalcomfort")
+                    .withAudience("fynjUzmxrw2sGQCK5LHiRBOOKh7FMbIu")
                     .build(); //Reusable verifier instance
             verifier.verify(token);
         } catch (JWTVerificationException exception) {
@@ -123,7 +124,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 .startsWith(AUTHENTICATION_SCHEME.toLowerCase() + " ");
     }
 
-    private void abortWithUnauthorized(ContainerRequest requestContext) {
+    private void abortWithUnauthorized(ContainerRequestContext requestContext) {
 
         // Abort the filter chain with a 401 status code
         // The "WWW-Authenticate" is sent along with the response
@@ -133,18 +134,14 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
     @Override
-    public ContainerRequest filter(ContainerRequest cr) {
-        Logger.getLogger(AuthenticationFilter.class.getName()).log(Level.INFO, null, "Filtering");
+    public void filter(ContainerRequestContext requestContext) throws IOException {
         // Get the Authorization header from the request
         String authorizationHeader
-                = cr.getHeaderValue("authorization");
+                = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         // Validate the Authorization header
-        Logger.getLogger(AuthenticationFilter.class.getName()).log(Level.INFO, "HEADERAUTH" + authorizationHeader);
         if (!isTokenBasedAuthentication(authorizationHeader)) {
-            System.out.println("auth header ok");
-            abortWithUnauthorized(cr);
-            return cr;
+            abortWithUnauthorized(requestContext);
         }
 
         // Extract the token from the Authorization header
@@ -155,11 +152,9 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
             // Validate the token
             verifyToken(token);
-            System.out.println("Verified ok");
 
         } catch (Exception e) {
-            abortWithUnauthorized(cr);
+            abortWithUnauthorized(requestContext);
         }
-        return cr;
     }
 }

@@ -23,8 +23,8 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.auth;
 
-import com.sun.jersey.spi.container.ContainerRequest;
-import com.sun.jersey.spi.container.ContainerRequestFilter;
+import static co.edu.uniandes.isis2503.nosqljpa.auth.AuthenticationFilter.AUTHENTICATION_SCHEME;
+import com.auth0.jwt.JWT;
 import java.io.IOException;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Method;
@@ -34,8 +34,11 @@ import java.util.List;
 import javax.annotation.Priority;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
@@ -57,8 +60,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private ResourceInfo resourceInfo;
 
     @Override
-    public ContainerRequest filter(ContainerRequest requestContext)  {
-
+    public void filter(ContainerRequestContext requestContext) throws IOException {
         // Get the resource class which matches with the requested URL
         // Extract the roles declared by it
         Class<?> resourceClass = resourceInfo.getResourceClass();
@@ -74,16 +76,15 @@ public class AuthorizationFilter implements ContainerRequestFilter {
             // Check if the user is allowed to execute the method
             // The method annotations override the class annotations
             if (methodRoles.isEmpty()) {
-                checkPermissions(classRoles);
+                checkPermissions(requestContext, classRoles);
             } else {
-                checkPermissions(methodRoles);
+                checkPermissions(requestContext, methodRoles);
             }
 
         } catch (Exception e) {
             throw new WebApplicationException(
                     Response.status(Response.Status.FORBIDDEN).build());
         }
-        return requestContext;
     }
 
     // Extract the roles from the annotated element
@@ -101,8 +102,19 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         }
     }
 
-    private void checkPermissions(List<Role> allowedRoles) throws Exception {
+    private void checkPermissions(ContainerRequestContext requestContext, List<Role> allowedRoles) throws Exception {
         // Check if the user contains one of the allowed roles
         // Throw an Exception if the user has not permission to execute the method
+        String authorizationHeader
+                = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
+        String token = authorizationHeader
+                .substring(AUTHENTICATION_SCHEME.length()).trim();
+        List<String> roles = JWT.decode(token).getClaim("roles").asList(String.class);
+        for(String role: roles) {
+            if(allowedRoles.contains(Role.valueOf(role)))
+                return;
+        }
+        throw new WebApplicationException(
+                    Response.status(Response.Status.FORBIDDEN).build());
     }
 }
