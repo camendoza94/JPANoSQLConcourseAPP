@@ -23,15 +23,17 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.service;
 
+import co.edu.uniandes.isis2503.nosqljpa.auth.AuthorizationFilter.Role;
+import co.edu.uniandes.isis2503.nosqljpa.auth.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.IFloorLogic;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.IRoomLogic;
 import co.edu.uniandes.isis2503.nosqljpa.logic.FloorLogic;
 import co.edu.uniandes.isis2503.nosqljpa.logic.RoomLogic;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.FloorDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.RoomDTO;
-import com.sun.istack.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -47,6 +49,7 @@ import javax.ws.rs.core.Response;
  * @author ca.mendoza968
  */
 @Path("/floors")
+@Secured
 @Produces(MediaType.APPLICATION_JSON)
 public class FloorService {
 
@@ -95,7 +98,7 @@ public class FloorService {
             floorLogic.delete(id);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Sucessful: Floor was deleted").build();
         } catch (Exception e) {
-            Logger.getLogger(FloorService.class).log(Level.WARNING, e.getMessage());
+            Logger.getLogger(FloorService.class.getName()).log(Level.WARNING, e.getMessage());
             return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("We found errors in your query, please contact the Web Admin.").build();
         }
     }

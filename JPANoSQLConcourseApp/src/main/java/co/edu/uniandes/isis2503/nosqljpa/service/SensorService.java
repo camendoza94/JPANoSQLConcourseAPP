@@ -32,9 +32,9 @@ import co.edu.uniandes.isis2503.nosqljpa.logic.RealTimeDataLogic;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.MeasurementDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.SensorDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.RealTimeDataDTO;
-import com.sun.istack.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -118,7 +118,7 @@ public class SensorService {
             sensorLogic.delete(id);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Sucessful: Sensor was deleted").build();
         } catch (Exception e) {
-            Logger.getLogger(SensorService.class).log(Level.WARNING, e.getMessage());
+            Logger.getLogger(SensorService.class.getName()).log(Level.WARNING, e.getMessage());
             return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("We found errors in your query, please contact the Web Admin.").build();
         }
     }    

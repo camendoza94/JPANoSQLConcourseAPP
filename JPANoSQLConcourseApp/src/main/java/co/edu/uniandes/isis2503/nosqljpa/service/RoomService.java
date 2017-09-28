@@ -32,9 +32,9 @@ import co.edu.uniandes.isis2503.nosqljpa.logic.SensorLogic;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.RoomDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.ConsolidatedDataDTO;
 import co.edu.uniandes.isis2503.nosqljpa.model.dto.model.SensorDTO;
-import com.sun.istack.logging.Logger;
 import java.util.List;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -120,7 +120,7 @@ public class RoomService {
             roomLogic.delete(id);
             return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Sucessful: Room was deleted").build();
         } catch (Exception e) {
-            Logger.getLogger(RoomService.class).log(Level.WARNING, e.getMessage());
+            Logger.getLogger(RoomService.class.getName()).log(Level.WARNING, e.getMessage());
             return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("We found errors in your query, please contact the Web Admin.").build();
         }
     }    

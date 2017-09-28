@@ -36,21 +36,16 @@
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-
-        <!-- ##### Jax-RS (RestFul) Library ##### -->
-        <!-- # Jersey Rest Server # -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-server</artifactId>
             <version>1.8</version>
         </dependency>
-        <!-- # Jersey JSON Support # -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
             <version>1.8</version>
         </dependency>
-        <!-- # Jersey Client # -->
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-client</artifactId>
@@ -85,11 +80,20 @@
             <artifactId>derbyclient</artifactId>
             <version>10.10.2.0</version>
         </dependency>
-        
         <dependency>
             <groupId>com.impetus.kundera.client</groupId>
             <artifactId>kundera-cassandra-ds-driver</artifactId>
             <version>3.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>3.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>jwks-rsa</artifactId>
+            <version>0.1.0</version>
         </dependency>
                 
     </dependencies>
