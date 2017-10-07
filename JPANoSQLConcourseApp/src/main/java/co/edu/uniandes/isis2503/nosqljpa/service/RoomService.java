@@ -23,6 +23,8 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.service;
 
+import co.edu.uniandes.isis2503.nosqljpa.auth.AuthorizationFilter.Role;
+import co.edu.uniandes.isis2503.nosqljpa.auth.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.IRoomLogic;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.IConsolidatedDataLogic;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.ISensorLogic;
@@ -50,6 +52,7 @@ import javax.ws.rs.core.Response;
  * @author ca.mendoza968
  */
 @Path("/rooms")
+@Secured({Role.admin})
 @Produces(MediaType.APPLICATION_JSON)
 public class RoomService {
     private final IRoomLogic roomLogic;
@@ -68,6 +71,7 @@ public class RoomService {
     }
 
     @POST
+    @Secured({Role.admin})
     @Path("{code}/consolidateddata")
     public ConsolidatedDataDTO addConsolidatedData(@PathParam("code") String code, ConsolidatedDataDTO dto) {
         RoomDTO room = roomLogic.findCode(code);
@@ -81,6 +85,7 @@ public class RoomService {
     }
     
     @GET
+    @Secured
     @Path("{code}/consolidateddata")
     public List<ConsolidatedDataDTO> getConsolidatedData(@PathParam("code") String code) {
         RoomDTO room = roomLogic.findCode(code);

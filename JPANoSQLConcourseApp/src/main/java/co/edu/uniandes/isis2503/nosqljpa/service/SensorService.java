@@ -23,6 +23,8 @@
  */
 package co.edu.uniandes.isis2503.nosqljpa.service;
 
+import co.edu.uniandes.isis2503.nosqljpa.auth.AuthorizationFilter.Role;
+import co.edu.uniandes.isis2503.nosqljpa.auth.Secured;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.IMeasurementLogic;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.ISensorLogic;
 import co.edu.uniandes.isis2503.nosqljpa.interfaces.IRealTimeDataLogic;
@@ -50,6 +52,7 @@ import javax.ws.rs.core.Response;
  * @author ca.mendoza968
  */
 @Path("/sensors")
+@Secured({Role.admin})
 @Produces(MediaType.APPLICATION_JSON)
 public class SensorService {
     private final ISensorLogic sensorLogic;
@@ -68,6 +71,7 @@ public class SensorService {
     }
 
     @POST
+    @Secured({Role.admin})
     @Path("{code}/realtimedata")
     public RealTimeDataDTO addRealTimeData(@PathParam("code") String code, RealTimeDataDTO dto) {
         SensorDTO sensor = sensorLogic.findCode(code);
@@ -79,6 +83,7 @@ public class SensorService {
     }
     
     @GET
+    @Secured
     @Path("{code}/realtimedata")
     public List<RealTimeDataDTO> getRealTimeData(@PathParam("code") String code) {
         SensorDTO sensor = sensorLogic.findCode(code);
