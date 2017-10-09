@@ -86,9 +86,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
                 KeyPair keyPair = keyPairGenerator.generateKeyPair();
                 return (RSAPrivateKey) keyPair.getPrivate();
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(AuthenticationFilter.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchProviderException ex) {
+            } catch (NoSuchAlgorithmException | NoSuchProviderException ex) {
                 Logger.getLogger(AuthenticationFilter.class.getName()).log(Level.SEVERE, null, ex);
             }
             return null;
@@ -104,9 +102,19 @@ public class AuthenticationFilter implements ContainerRequestFilter {
 
     void verifyToken(String token) {
         try {//Cambiar por variables de entorno
+            String issuer = "https://arquisoft20172-mendoza.auth0.com/";
+            String audience;
+            //Access token
+            if (!JWT.decode(token).getClaim("gty").isNull() && JWT.decode(token).getClaim("gty").asString().equals("client-credentials")) {
+                audience = "mendoza.com/thermalcomfort";
+            }
+            //ID token
+            else {
+                audience = "3_oUY2nDQVT3cMiaut_XDPX5KkpuZjRO";
+            }
             JWTVerifier verifier = JWT.require(algorithm)
-                    .withIssuer("https://arquisoft20172-mendoza.auth0.com/")
-                    .withAudience("3_oUY2nDQVT3cMiaut_XDPX5KkpuZjRO")
+                    .withIssuer(issuer)
+                    .withAudience(audience)
                     .build(); //Reusable verifier instance
             verifier.verify(token);
         } catch (JWTVerificationException exception) {

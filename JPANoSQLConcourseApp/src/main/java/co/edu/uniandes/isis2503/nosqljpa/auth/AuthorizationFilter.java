@@ -53,7 +53,8 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     public enum Role {
         admin,
-        user
+        user,
+        service
     }
 
     @Context
@@ -109,7 +110,12 @@ public class AuthorizationFilter implements ContainerRequestFilter {
                 = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         String token = authorizationHeader
                 .substring(AUTHENTICATION_SCHEME.length()).trim();
-        List<String> roles = JWT.decode(token).getClaim("roles").asList(String.class);
+        List<String> roles = new ArrayList();
+        if (!JWT.decode(token).getClaim("gty").isNull() && JWT.decode(token).getClaim("gty").asString().equals("client-credentials")) {
+            roles.add("service");
+        } else {
+            roles = JWT.decode(token).getClaim("roles").asList(String.class);
+        }
         for(String role: roles) {
             if(allowedRoles.contains(Role.valueOf(role)))
                 return;

@@ -71,7 +71,7 @@ public class RoomService {
     }
 
     @POST
-    @Secured({Role.admin})
+    @Secured({Role.admin, Role.service})
     @Path("{code}/consolidateddata")
     public ConsolidatedDataDTO addConsolidatedData(@PathParam("code") String code, ConsolidatedDataDTO dto) {
         RoomDTO room = roomLogic.findCode(code);
