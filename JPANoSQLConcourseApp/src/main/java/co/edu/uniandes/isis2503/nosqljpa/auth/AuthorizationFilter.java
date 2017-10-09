@@ -106,6 +106,8 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private void checkPermissions(ContainerRequestContext requestContext, List<Role> allowedRoles) throws Exception {
         // Check if the user contains one of the allowed roles
         // Throw an Exception if the user has not permission to execute the method
+        if(allowedRoles.isEmpty())
+            return;
         String authorizationHeader
                 = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         String token = authorizationHeader
